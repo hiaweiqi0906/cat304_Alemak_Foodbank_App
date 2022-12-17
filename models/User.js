@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const userSchema = new Schema({
+const UserSchema = new Schema({
     noIC:{
         type: String,
         default: ''
@@ -13,18 +13,50 @@ const userSchema = new Schema({
         type: String,
         default: ''
     }, 
+    password:{
+        type: String,
+        default: ''
+    },
     email:{
         type: String,
         default: ''
     }, 
-    documentId:{
+    payslipUri:{
         type: String,
         default: ''
     }, 
-    addressId:{
+    payslipCloudId:{
         type: String,
         default: ''
     }, 
+    ICFrontUri:{
+        type: String,
+        default: ''
+    }, 
+    ICFrontCloudId:{
+        type: String,
+        default: ''
+    }, 
+    ICBackUri:{
+        type: String,
+        default: ''
+    }, 
+    ICBackCloudId:{
+        type: String,
+        default: ''
+    }, 
+    address:{
+        type: String,
+        default: ''
+    },
+    state:{
+        type: String,
+        default: ''
+    },
+    location:{
+        type: String,
+        default: ''
+    },
     avatarUri:{
         type: String,
         default: ''
@@ -37,7 +69,7 @@ const userSchema = new Schema({
         type:String,
         default: ''
     },
-    telephoneNumber:{
+    telNumber:{
         type:String,
         default: ''
     },

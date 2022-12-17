@@ -3,21 +3,20 @@ if(process.env.NODE_ENV !== 'production'){
 }
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-const User = require('models/User')
+const User = require('./models/User.js')
 
 const users=[]
 
 const initializePassport = require('./config/passport-config')
 initializePassport(
-    passport, 
-    email => users.find(user=> user.email === email),
-    id => users.find(user => user.id === id)
-)
+    passport)
+
 
 app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false}))
@@ -32,6 +31,12 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
+const db = process.env.MONGO_URI
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true})
+  .then((result) => {
+    console.log("successfully connected to db");
+  })
+  .catch((err) => console.log(err))
 
 app.get('/', checkAuth, (req, res) => {
     res.render('index.ejs', {name: req.user.name})
@@ -48,14 +53,49 @@ app.get('/register', checkNotAuth, (req, res)=>{
 
 app.post('/register', async (req, res)=>{
     try{
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        users.push({
-            id: Date.now().toString(),
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPassword
+        User.findOne({
+            email: req.body.email
         })
-        res.redirect('/login')
+            .then((user) => {
+                if (!user) {
+                    const newUser = new User({
+                        firstName: req.body.firstName, 
+                        lastName: req.body.lastName, 
+                        email: req.body.email, 
+                        password: req.body.password,
+                        telNumber:  req.body.noTel,
+                        gender:  req.body.gender,
+                        noIC:  req.body.noic
+                    })
+                    bcrypt.genSalt(10, function (err, salt) {
+                        if (err) throw err
+    
+                        bcrypt.hash(req.body.password, salt, function (err, hash) {
+                            if (err) throw err
+    
+                            newUser.password = hash
+                            newUser.save()
+                                .then((users) => {
+                                    console.log('registered')
+                                    res.redirect('/login')
+                                })
+                                .catch(err => console.log(err))
+                        });
+                    });
+                } else {
+                    console.log('user exist')
+                    res.redirect('/register')
+                }
+            })
+            .catch(err => console.log(err))
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        // users.push({
+        //     id: Date.now().toString(),
+        //     name: req.body.name,
+        //     email: req.body.email,
+        //     password: hashedPassword
+        // })
+        // res.redirect('/login')
     }catch{
         res.redirect('/register')
     }

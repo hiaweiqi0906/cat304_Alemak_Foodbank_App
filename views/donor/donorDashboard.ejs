@@ -1,0 +1,24 @@
+<h1>Hi <%= name %></h1>
+
+<form action="/donor/logout?_method=DELETE" method="post">
+    <button type="submit">Logout</button>
+</form>
+<a href="/donor/setting">setting</a>
+
+<div style="background-color: aqua; width:100% - 20px; height: 500px; padding: 0px 10px">
+    <h1>Donation</h1>
+    <div style="width: 20%; height: 100px;"><a href="/donor/donation/add">Add Donation</a></div>
+    <div style="width: 20%; height: 100px;"><a href="/donor/donation/">All Donation</a></div>
+</div>
+
+<div style="background-color: yellow; width:100% - 20px; height: 500px; padding: 0px 10px">
+    <h1>Order Status</h1>
+    <div style="width: 20%; height: 100px;"><a href="/donor/order/">All Order</a></div>
+</div>
+ 
+<div style="background-color: blueviolet; width:100% - 20px; height: 500px; padding: 0px 10px">
+    <h1>Marketplace</h1>
+    <div style="width: 20%; height: 100px;"><a href="/donor/item/">All Item</a></div>
+    <div style="width: 20%; height: 100px;"><a href="/donor/item/add">Add Item</a></div>
+
+</div>

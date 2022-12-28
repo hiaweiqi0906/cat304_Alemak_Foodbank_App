@@ -1,11 +1,14 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const MarketplaceItemSchema = new Schema({
-    itemId:{
+const ItemSchema = new Schema({
+    itemName:{
         type: String,
         default: ''
     },
-    sellerId:{
+    itemExpiryDate:{
+        type: Date,
+    },
+    sellerIC:{
         type: String,
         default: ''
     },
@@ -15,6 +18,6 @@ const MarketplaceItemSchema = new Schema({
     }
 }, {timestamps: true})
 
-const MarketplaceItem = new mongoose.model('MarketplaceItem', MarketplaceItemSchema)
+const Item = new mongoose.model('Item', ItemSchema)
 
-module.exports = MarketplaceItem
+module.exports = Item

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        const item = [];
+        $(document).ready(function () {
+
+            $(".addItem").click(function () {
+                item.push({ itemName: $("#itemName").val(), itemExpiryDate: $("#itemExpiryDate").val() })
+                refreshDiv();
+            });
+
+            $("#submitButton").click(function () {
+                data = {
+                    donationDate: $("#donationDate").val(),
+                    amountAvailable: $("#donationQuantity").val(),
+                    item: item
+                }
+                console.log(data)
+                $.ajax({
+                    type: "POST",
+                    data: data,
+                    url: "/donor/donation/add",
+                    success: function (msg) {
+                        $('.answer').html(msg);
+                    }
+                });
+                // $.post("/donor/donation/add",
+                //     data,
+                //     function (result) {
+                //         $("span").html(result);
+                //     });
+            });
+
+        });
+
+        function removeItem(i) {
+            if (i > -1) {
+                item.splice(i, 1);
+            }
+            refreshDiv();
+        }
+
+        function refreshDiv() {
+            $("#result").empty();
+            $.each(item, function (index, value) {
+                $("#result").append(index + ": " + item[index].itemName + '<button onclick="removeItem(' + index + ')">Remove this item</button>[' + index + ']<br>');
+            });
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <h1>Donation Details</h1>
+        
+        <label for="donationDate">Donation Date: </label>
+        <p>
+           <%=donation.donationDate.toISOString().substr(0, 10)%></p>
+        <br>
+        <label for="donationQuantity">Donation Quantity: </label>
+        <p><%=donation.amountAvailable%></p>
+        <br>
+        <div id="result"></div>
+        
+    <% donation.items.forEach((item, index)=> { %>
+
+        <img src="<%=item.itemUri%>" style="width: 50px; height: 50px;" />
+        <p><%=item.itemName%></p><br>
+        <p><%=item.itemExpiryDate%></p>
+        <%})%>
+        <a href="/recipient/donation/register/<%=donation._id%>">Register</a>
+        <a href="/recipient/donation/">Cancel</a>
+</body>
+
+</html>

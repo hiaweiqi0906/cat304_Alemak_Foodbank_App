@@ -1,0 +1,7 @@
+<h1>All Orders</h1>
+
+<% for (var i=0; i < order.length; i++ ) { %>
+    <p><%= order[i] %></p>
+    <a href="/donor/order/<%=order[i]._id%>">details</a>
+    <br>
+<% } %>

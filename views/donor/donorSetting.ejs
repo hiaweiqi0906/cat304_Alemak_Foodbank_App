@@ -1,0 +1,66 @@
+<form action="/donor/setting" method="post" enctype="multipart/form-data">
+    <label for="coverImg">Avatar: </label>
+    <img src="<%=user.avatarUri%>" style="width: 50px; height: 50px;"/>
+    <input type="file" name="coverImg" id="coverImg">
+    <br>
+
+    <label for="firstName">firstName: </label>
+    <input type="text" name="firstName" id="firstName" value="<%=user.firstName%>">
+    <br>
+
+    <label for="lastName">lastName: </label>
+    <input type="text" name="lastName" id="lastName" value="<%=user.lastName%>">
+    <br>
+    
+    <label for="noIC">noIC: </label>
+    <input type="text" name="noIC" id="noIC" value="<%=user.noIC%>" readonly>
+    <br>
+
+    <label for="email">email: </label>
+    <input type="text" name="email" id="email" value="<%=user.email%>" readonly>
+    <br>
+
+    
+
+    <label for="address">address: </label>
+    <input type="text" name="address" id="address" value="<%=user.address%>" >
+    <br>
+
+    <label for="state">state: </label>
+    <input type="text" name="state" id="state" value="<%=user.state%>" >
+    <br>
+
+    <label for="location">location: </label>
+    <input type="text" name="location" id="location" value="<%=user.location%>" >
+    <br>
+
+    <label for="gender">gender: </label>
+    <input type="text" name="gender" id="gender" value="<%=user.gender%>">
+    <br>
+
+    <label for="telNumber">telNumber: </label>
+    <input type="number" name="telNumber" id="telNumber" value="<%=user.telNumber%>">
+    <br>
+
+    <input type="submit" value="Update">
+</form>
+
+<% if ((typeof(messages.error) !== 'undefined')) messages.error.forEach(e => {%>
+    <%=e%>
+<%})%>
+
+<form action="/donor/changePassword" method="post">
+    <label for="password">old password: </label>
+    <input type="password" name="password" id="password">
+    <br>
+
+    <label for="newPassword1">new password 1: </label>
+    <input type="password" name="newPassword1" id="newPassword1">
+    <br>
+
+    <label for="newPassword2">new password 2: </label>
+    <input type="password" name="newPassword2" id="newPassword2">
+    <br>
+
+    <input type="submit" value="Change Password">
+</form>

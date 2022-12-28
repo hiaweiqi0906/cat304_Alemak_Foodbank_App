@@ -1,0 +1,8 @@
+<h1>All Donation</h1>
+
+<% for (var i =0; i < donation.length;  i++ ) { %>
+    <p><%= donation[i] %></p><a href="/donor/donation/<%=donation[i]._id%>">details</a><br>
+    <form action="/donor/donation/delete/<%=donation[i]._id%>" method="post">
+        <input type="submit" value="Delete">
+    </form>
+<% } %>

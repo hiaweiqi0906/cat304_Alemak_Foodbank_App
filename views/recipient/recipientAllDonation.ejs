@@ -1,0 +1,7 @@
+<h1>All Donation</h1>
+
+<% for (var i=0; i < donations.length; i++ ) { %>
+    <p><%= donations[i] %></p>
+    <a href="/recipient/donation/<%=donations[i]._id%>">details</a>
+    <br>
+<% } %>

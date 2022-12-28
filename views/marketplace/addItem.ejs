@@ -1,0 +1,37 @@
+<form action="/donor/item/add" method="post" enctype="multipart/form-data">
+    <label for="coverImg">CoverImg: </label>
+    <input type="file" name="coverImg" id="coverImg">
+    <br>
+
+    <label for="img1">img1: </label>
+    <input type="file" name="img1" id="img1">
+    <br>
+
+    <label for="img2">img2: </label>
+    <input type="file" name="img2" id="img2">
+    <br>
+
+    <label for="img3">img3: </label>
+    <input type="file" name="img3" id="img3">
+    <br>
+
+    <label for="itemName">itemName: </label>
+    <input type="text" name="itemName" id="itemName">
+    <br>
+
+    <label for="itemExpiryDate">itemExpiryDate: </label>
+    <input type="date" name="itemExpiryDate" id="itemExpiryDate">
+    <br>
+
+    <label for="itemDescription">itemDescription: </label>
+    <textarea name="itemDescription" id="itemDescription" cols="30" rows="10"></textarea>
+    <br>
+
+    <label for="itemPrice">itemPrice: </label>
+    <input type="number" name="itemPrice" id="itemPrice">
+    <br>
+
+    <input type="submit" value="Add">
+    <a href="/donor/item/">Cancel</a>
+
+</form>

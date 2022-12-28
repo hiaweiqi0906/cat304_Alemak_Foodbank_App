@@ -1,0 +1,39 @@
+<form action="/recipient/cart/add/<%=item._id%>" method="post">
+    <label for="coverImg">CoverImg: </label>
+    <img src="<%=item.coverUri%>" style="width: 50px; height: 50px;"/>
+    <input type="file" name="coverImg" id="coverImg">
+    <br>
+
+    <label for="img1">img1: </label>
+    <img src="<%= (typeof(item.itemUri[0]) === 'undefined') ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Google_Images_2015_logo.svg/1200px-Google_Images_2015_logo.svg.png' : item.itemUri[0] %>" style="width: 50px; height: 50px;"/>
+    <br>
+
+    <label for="img2">img2: </label>
+    <img src="<%= typeof(item.itemUri[1]) === 'undefined' ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Google_Images_2015_logo.svg/1200px-Google_Images_2015_logo.svg.png' : item.itemUri[1] %>" style="width: 50px; height: 50px;"/>
+    <br>
+
+    <label for="img3">img3: </label>
+    <img src="<%= typeof(item.itemUri[2]) === 'undefined' ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Google_Images_2015_logo.svg/1200px-Google_Images_2015_logo.svg.png' : item.itemUri[2]%>" style="width: 50px; height: 50px;"/>
+    <br>
+
+    <label for="itemName">itemName: </label>
+    <p><%=item.itemName%></p>
+    <br>
+
+    <label for="itemExpiryDate">itemExpiryDate: </label>
+    <p><%=item.itemExpiryDate.toISOString().substr(0, 10)%></p>
+    <br>
+
+    <label for="itemDescription">itemDescription: </label>
+    <p><%=item.itemDescription%></p>
+    <br>
+
+    <label for="itemPrice">itemPrice: </label>
+    <p>RM <%=item.itemPrice%>.00</p>
+    <br>
+
+    <input type="submit" value="Add to Cart">
+    <!-- <a href="/recipient/cart/add/<%=item._id%>">Add to Cart</a>
+    <a href="/recipient/favourite/add/<%=item._id%>">Add to wishlist</a> -->
+
+</form>

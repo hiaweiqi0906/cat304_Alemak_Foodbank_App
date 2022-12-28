@@ -1,5 +1,8 @@
 <h1>Register</h1>
-<form action="/register" method="post">
+<% if(messages.error) { %>
+    <%= messages.error%>
+<% } %>
+<form action="/donor/register" method="post">
     <div>
         <label for="firstName">First Name</label>
         <input type="text" name="firstName" id="firstName" required><br>
@@ -21,4 +24,4 @@
     </div>
 </form>
 
-<a href="/login">Login</a>
+<a href="/donor/login">Login</a>

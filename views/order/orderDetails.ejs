@@ -1,0 +1,38 @@
+<h1>Order Details</h1>
+<label for="orderId">Order ID: </label>
+<input type="text" name="orderId" id="orderId" readonly value="<%=order._id%>">
+<br>
+<label for="buyerName">Buyer Name: </label>
+<input type="text" name="buyerName" id="buyerName" readonly value="<%=order.buyerName%>">
+<br>
+<label for="buyerAddress">Buyer Address: </label>
+<input type="text" name="buyerAddress" id="buyerAddress" readonly value="<%=order.buyerAddress%>">
+<br>
+<div class="itemList" style="width: 60%; height: 500px; ">
+<h3>Item List</h3>
+<% order.marketplaceItems.forEach((item, index)=> { %>
+    <img src="<%=item.itemUri%>" style="width: 50px; height: 50px;"/>
+    <p></p>
+        <input type="text" name="itemNameEdit" id="itemNameEdit" value="<%=item.itemName%>"
+            placeholder="Item Name"><br>
+        <input type="date" name="itemExpiryDateEdit" id="itemExpiryDateEdit"
+            value="<%=item.itemExpiryDate%>" placeholder="Item Expiry Date">
+    <%})%>
+</div>
+<br>
+<label for="orderDate">Order Date: </label>
+<input type="text" name="orderDate" id="orderDate" readonly value="<%=order.orderDate%>">
+<br>
+<label for="paymentDate">Payment Date: </label>
+<input type="text" name="paymentDate" id="paymentDate" readonly value="<%=order.paymentDate%>">
+<br>
+<label for="totalAmountPaid">Total Amount Paid: </label>
+<input type="text" name="totalAmountPaid" id="totalAmountPaid" readonly value="<%=totalAmount%>">
+<br>
+
+<label for="deliveryStatus">Delivery Status: </label>
+
+<input type="text" name="deliveryStatus" id="deliveryStatus" readonly value="<%=order.deliveryStatus%>">
+
+<a href="/order/cancel/id" <% order.deliveryStatus === 'Order has been placed by seller'? disabled : '' %> >Cancel Order</a><br>
+<a href="/order/shipout/id" <% order.deliveryStatus === 'Order has been placed by seller'? disabled : '' %> >Ship Out</a>

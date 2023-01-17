@@ -1,1 +1,19 @@
-<a href="/donor">Donor</a><br><a href="/recipient">Recipient</a>
+<%- include('partials/header') %>
+  <%- include('partials/nav') %>
+
+    <div id="card">
+      <div id="card-content">
+        <div id="card-title">
+          <h2 class="form-big-title">DONOR / RECIPIENT</h2>
+          <div class="underline-title"></div>
+        </div>
+        <form class="form-card" action="/donor">
+          <input id="submit-btn" style="margin-top: 35px;" type="submit" name="submit" value="DONOR" />
+        </form>
+        <form class="form-card" action="/recipient">
+          <input id="submit-btn" style="margin-top: 20px;" type="submit" name="submit" value="RECIPIENT" />
+        </form>
+      </div>
+    </div>
+    <br><a href="/donor">Donor</a><br><a href="/recipient">Recipient</a>
+    <%- include('partials/footer') %>

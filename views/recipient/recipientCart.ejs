@@ -1,10 +1,10 @@
 <h1>Cart</h1>
 
 <% for (var i=0; i < items.length; i++ ) { %>
-    <p><%= items[i] %></p>
+    <p><%= items[i].itemName %> x<%=items[i].itemQuantity%></p>
     <a href="/marketplace/item/<%=items[i].itemID%>">details</a>
     <br>
 <% } %>
 <%if(items.length!==0){%>
-<a href="/recipient/order/place">Place Order</a>
+<a href="/recipient/placeorder">Place Order</a>
 <%}%>

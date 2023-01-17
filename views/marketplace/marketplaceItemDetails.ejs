@@ -24,6 +24,10 @@
     <p><%=item.itemExpiryDate.toISOString().substr(0, 10)%></p>
     <br>
 
+    <label>itemQuantity: </label>
+    <p>x <%=item.itemQuantity%></p>
+    <br>
+
     <label for="itemDescription">itemDescription: </label>
     <p><%=item.itemDescription%></p>
     <br>
@@ -31,7 +35,8 @@
     <label for="itemPrice">itemPrice: </label>
     <p>RM <%=item.itemPrice%>.00</p>
     <br>
-
+    <label for="itemQuantity">itemQuantity: </label>
+    <input type="text" name="itemQuantity" id="itemQuantity">
     <input type="submit" value="Add to Cart">
     <!-- <a href="/recipient/cart/add/<%=item._id%>">Add to Cart</a>
     <a href="/recipient/favourite/add/<%=item._id%>">Add to wishlist</a> -->

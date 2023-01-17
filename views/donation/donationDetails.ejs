@@ -67,6 +67,7 @@
         <input type="submit" value="Upload"><br>
         <input type="text" name="itemName" id="itemName" placeholder="Item Name"><br>
         <input type="date" name="itemExpiryDate" id="itemExpiryDate" placeholder="Item Expiry Date">
+        <input type="text" name="itemQuantity" id="itemQuantity" placeholder="Item Quantity">
         <button class="addItem">Add Item</button>
     </form>
     <form action="/donor/donation/updateDonation/<%=donation._id%>" method="post">
@@ -87,8 +88,10 @@
         <form action="/donor/donation/editItemUpdate/<%=index%>/<%=donation._id%>" method="post">
             <input type="text" name="itemNameEdit" id="itemNameEdit" value="<%=item.itemName%>"
                 placeholder="Item Name"><br>
-            <input type="date" name="itemExpiryDateEdit" id="itemExpiryDateEdit"
-                value="<%=item.itemExpiryDate%>" placeholder="Item Expiry Date">
+            <input type="date" name="itemExpiryDateEdit" id="itemExpiryDateEdit" value="<%=item.itemExpiryDate%>"
+                placeholder="Item Expiry Date">
+            <input type="text" name="itemQuantityEdit" id="itemQuantityEdit" value="<%=item.itemQuantity%>"
+                placeholder="Item Quantity">
             <input type="submit" value="Edit">
         </form>
         <a href="/donor/donation/deleteItemUpdate/<%=index%>/<%=donation._id%>">Delete</a>

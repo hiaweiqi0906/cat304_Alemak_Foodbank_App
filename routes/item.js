@@ -128,6 +128,7 @@ router.post('/edit/:id', upload.fields([{ //upload pic to db
                 itemCloudinaryId: imgID,
                 itemName: req.body.itemName,
                 itemExpiryDate: req.body.itemExpiryDate,
+                itemQuantity: req.body.itemQuantity,
                 sellerIC: req.user.noIC,
                 sellerAddress: req.user.address,
                 itemDescription: req.body.itemDescription,
@@ -189,7 +190,8 @@ router.post('/add', upload.fields([{ //upload pic to db
             sellerAvatarUri: req.user.avatarUri,
             sellerAddress: req.user.address,
             itemDescription: req.body.itemDescription,
-            itemPrice: req.body.itemPrice
+            itemPrice: req.body.itemPrice,
+            itemQuantity: req.body.itemQuantity
         })
 
         newItem.save()
@@ -248,6 +250,7 @@ router.post('/updateDonation/:id', (req, res) => {
 router.post('/editItemUpdate/:index/:id', (req, res) => {
     items[req.params.index].itemName = req.body.itemNameEdit
     items[req.params.index].itemExpiryDate = req.body.itemExpiryDateEdit
+    items[req.params.index].itemQuantity = req.body.itemQuantity
     Donation.findByIdAndUpdate(req.params.id, { items: items }, { new: true }, function (e, docs) {
         res.render('donation/donationDetails.ejs', { donation: docs })
     })
@@ -256,6 +259,7 @@ router.post('/editItemUpdate/:index/:id', (req, res) => {
 router.post('/editItem/:index', (req, res) => {
     items[req.params.index].itemName = req.body.itemNameEdit
     items[req.params.index].itemExpiryDate = req.body.itemExpiryDateEdit
+    items[req.params.index].itemQuantity = req.body.itemQuantity
     res.render('donation/addDonation.ejs', { items: items })
 })
 
@@ -267,7 +271,8 @@ router.post('/addItemUpdate/:id', upload.single("photo"), async (req, res) => {
             itemUri: result?.secure_url || '',
             itemCloudinaryID: result?.public_id || '',
             itemName: req.body.itemName,
-            itemExpiryDate: req.body.itemExpiryDate
+            itemExpiryDate: req.body.itemExpiryDate,
+            itemQuantity: req.body.itemQuantity
         };
         items.push(item)
         Donation.findByIdAndUpdate(req.params.id, { items: items }, { new: true }, function (e, docs) {

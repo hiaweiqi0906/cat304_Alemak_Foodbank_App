@@ -24,10 +24,10 @@ router.get('/order/:id', checkAuth, (req, res) => {
         if (err) console.log(err)
         else {
             let totalAmount = 0
-            docs.marketplaceItems.forEach(item=>{
-                totalAmount+=item.itemPrice
+            docs.marketplaceItems.forEach(item => {
+                totalAmount += item.itemPrice
             })
-            res.render('recipient/recipientOrderDetails.ejs', { order: docs, totalAmount})
+            res.render('recipient/recipientOrderDetails.ejs', { order: docs, totalAmount })
         }
     })
 })
@@ -57,8 +57,8 @@ router.get('/donation/register/:id', checkAuth, (req, res) => {
             Donation.findByIdAndUpdate(req.params.id, {
                 amountAvailable,
                 recipients
-            }, function(err, doc){
-                if(err ) console.log(err)
+            }, function (err, doc) {
+                if (err) console.log(err)
                 else res.redirect('/recipient/donation')
             })
         }
@@ -81,7 +81,7 @@ router.get('/dashboard', checkAuth, (req, res) => {
     res.render('recipient/recipientDashboard.ejs', { name: req.user.firstName })
 })
 
-router.get('/order/place', checkAuth, (req, res) => {
+router.get('/placeorder', checkAuth, (req, res) => {
     console.log('here')
     //arrange items to respective sellers
     let sellerICArr = []
@@ -137,25 +137,39 @@ router.get('/order/place', checkAuth, (req, res) => {
 })
 
 router.post('/cart/add/:id', checkAuth, (req, res) => {
+    let itemQuantityReq = req.body.itemQuantity
     Item.findById(req.params.id, function (e, item) {
         if (e) console.log(e)
         else {
-            let items = []
-            Cart.findOne({ userIC: req.user.noIC }, function (err, cart) {
-                if (err) console.log(err)
-                else items = cart.items
-            })
-            items.push({
-                itemCoverUri: item.coverUri,
-                itemID: item._id,
-                itemName: item.itemName,
-                itemPrice: item.itemPrice,
-                sellerIC: item.sellerIC
-            })
-            Cart.findOneAndUpdate({ userIC: req.user.noIC }, { items: items }, function (err, cart) {
-                if (err) console.log(err)
-                else res.redirect('/recipient/cart')
-            })
+            if (itemQuantityReq < item.itemQuantity) {
+                let items = []
+                Cart.findOne({ userIC: req.user.noIC }, function (err, cart) {
+                    if (err) console.log(err)
+                    else items = cart.items
+                })
+                items.push({
+                    itemCoverUri: item.coverUri,
+                    itemID: item._id,
+                    itemName: item.itemName,
+                    itemPrice: item.itemPrice,
+                    sellerIC: item.sellerIC,
+                    itemQuantity: itemQuantityReq
+                })
+                Cart.findOneAndUpdate({ userIC: req.user.noIC }, { items: items }, function (err, cart) {
+                    if (err) console.log(err)
+                    else {
+                        Item.findByIdAndUpdate(req.params.id, {itemQuantity: item.itemQuantity - itemQuantityReq}, function(err, doc){
+                            if(err) console.log(err)
+                            else{
+                                res.redirect('/recipient/cart')
+                            }
+                        })
+                    }
+                })
+            }else{
+                console.log("exceeded")
+                res.redirect(`/marketplace/item/${req.params.id}`)
+            }
         }
     })
 

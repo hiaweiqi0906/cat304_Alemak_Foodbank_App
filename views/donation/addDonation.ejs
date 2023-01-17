@@ -67,6 +67,7 @@
         <input type="submit" value="Upload"><br>
         <input type="text" name="itemName" id="itemName" placeholder="Item Name"><br>
         <input type="date" name="itemExpiryDate" id="itemExpiryDate" placeholder="Item Expiry Date">
+        <input type="text" name="itemQuantity" id="itemQuantity" placeholder="Item Quantity">
         <button class="addItem">Add Item</button>
     </form>
     <form action="/donor/donation/add" method="post">
@@ -81,13 +82,15 @@
         <a href="/donor/donation/cancel">Cancel</a>
     </form>
     <% items.forEach((item, index)=> { %>
-        
-        <img src="<%=item.itemUri%>" style="width: 50px; height: 50px;"/>
+
+        <img src="<%=item.itemUri%>" style="width: 50px; height: 50px;" />
         <form action="/donor/donation/editItem/<%=index%>" method="post">
             <input type="text" name="itemNameEdit" id="itemNameEdit" value="<%=item.itemName%>"
                 placeholder="Item Name"><br>
-            <input type="date" name="itemExpiryDateEdit" id="itemExpiryDateEdit"
-                value="<%=item.itemExpiryDate%>" placeholder="Item Expiry Date">
+            <input type="date" name="itemExpiryDateEdit" id="itemExpiryDateEdit" value="<%=item.itemExpiryDate%>"
+                placeholder="Item Expiry Date">
+            <input type="text" name="itemQuantityEdit" id="itemQuantityEdit" value="<%=item.itemQuantity%>"
+                placeholder="Item Expiry Date">
             <input type="submit" value="Edit">
         </form>
         <a href="/donor/donation/deleteItem/<%=index%>">Delete</a>

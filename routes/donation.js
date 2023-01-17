@@ -28,7 +28,8 @@ router.post('/addDonationItem', upload.single("photo"), async (req, res) => {
                 itemUri: result?.secure_url || '',
                 itemCloudinaryID: result?.public_id || '',
                 itemName: req.body.itemName,
-                itemExpiryDate: req.body.itemExpiryDate
+                itemExpiryDate: req.body.itemExpiryDate,
+                itemQuantity: req.body.itemQuantity
             };
             items.push(item)
             res.render('donation/addDonation.ejs', { items: items })
@@ -86,6 +87,7 @@ router.post('/updateDonation/:id', (req, res) => {
 router.post('/editItemUpdate/:index/:id', (req, res)=>{
     items[req.params.index].itemName = req.body.itemNameEdit
     items[req.params.index].itemExpiryDate = req.body.itemExpiryDateEdit
+    items[req.params.index].itemQuantity = req.body.itemQuantityEdit
     Donation.findByIdAndUpdate(req.params.id, { items: items }, { new: true }, function (e, docs) {
         res.render('donation/donationDetails.ejs', { donation: docs })
     })
@@ -94,6 +96,7 @@ router.post('/editItemUpdate/:index/:id', (req, res)=>{
 router.post('/editItem/:index', (req, res)=>{
     items[req.params.index].itemName = req.body.itemNameEdit
     items[req.params.index].itemExpiryDate = req.body.itemExpiryDateEdit
+    items[req.params.index].itemQuantity = req.body.itemQuantityEdit
     res.render('donation/addDonation.ejs', { items: items })
 })
 
@@ -105,7 +108,8 @@ router.post('/addItemUpdate/:id', upload.single("photo"), async (req, res) => {
             itemUri: result?.secure_url || '',
             itemCloudinaryID: result?.public_id || '',
             itemName: req.body.itemName,
-            itemExpiryDate: req.body.itemExpiryDate
+            itemExpiryDate: req.body.itemExpiryDate,
+            itemQuantity: req.body.itemQuantity
         };
         items.push(item)
         Donation.findByIdAndUpdate(req.params.id, { items: items }, { new: true }, function (e, docs) {

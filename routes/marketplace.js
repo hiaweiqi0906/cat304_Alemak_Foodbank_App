@@ -11,7 +11,7 @@ const Item = require('../models/Item');
 var items = []
 
 router.get('/', (req, res) => {
-    Item.find({}, function (err, items) {
+    Item.find({itemQuantity: {$gt: 0}}, function (err, items) {
         res.render('marketplace/marketplaceIndex.ejs', {items: items})
 
     })

@@ -38,6 +38,10 @@ const ItemSchema = new Schema({
         type: Number,
         default: 0.0
     },
+    itemQuantity:{
+        type: Number,
+        default: 0.0
+    },
     sellerName:{
         type: String,
         default: ''

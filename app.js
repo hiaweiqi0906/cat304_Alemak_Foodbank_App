@@ -14,11 +14,10 @@ const User = require('./models/User.js')
 
 const users=[]
 app.use(express.json())
+app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true}))
 const initializePassport = require('./config/passport-config')
-initializePassport(
-    passport)
-
+initializePassport(passport)
 
 app.set('view-engine', 'ejs')
 

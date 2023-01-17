@@ -36,6 +36,10 @@
     <input type="date" name="itemExpiryDate" id="itemExpiryDate" value="<%=item.itemExpiryDate.toISOString().substr(0, 10)%>">
     <br>
 
+    <label for="itemQuantity">itemQuantity: </label>
+    <input type="text" name="itemQuantity" id="itemQuantity" value="<%=item.itemQuantity%>">
+    <br>
+
     <label for="itemDescription">itemDescription: </label>
     <textarea name="itemDescription" id="itemDescription" cols="30" rows="10"><%=item.itemDescription%></textarea>
     <br>
